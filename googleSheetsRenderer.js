@@ -9,6 +9,8 @@
     { text: "NEEDS ACTION!  (Doesn't have QA label, CI red, or has conflicts)", color: githubPRs.colors.needsAction }
   ]
 
+  var sheet;
+
   function onOpen(menuName, tabName) {
     this.spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
     var entries = [{
@@ -21,26 +23,26 @@
 
   function renderTree(tree) {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
-    this.sheet = spreadsheet.getSheetByName('Branch Strategy');
+    sheet = spreadsheet.getSheetByName('Branch Strategy');
     clearOldCells()
     renderLegend()
     displayNode(legendLabels.length + 2, 0, tree) // leave some space between legend and branches
   }
 
   function renderLegend() {
-    var legendCells = this.sheet.getRange("B1:B" + legendLabels.length)
+    var legendCells = sheet.getRange("B1:B" + legendLabels.length)
     legendCells.setFontColor('black');
     legendCells.setFontWeight('bold');
     legendCells.setVerticalAlignment('middle');
     legendLabels.forEach(function(label, index) {
-      var cell = this.sheet.getRange("B" + (index + 1) + ":" + "B" + (index + 1));
+      var cell = sheet.getRange("B" + (index + 1) + ":" + "B" + (index + 1));
       cell.setBackground(label.color);
       cell.setValue(label.text);
     })
   }
 
   function clearOldCells() {
-    var range = this.sheet.getRange("A1:Z26");
+    var range = sheet.getRange("A1:Z26");
     range.clear()
   }
 
@@ -49,7 +51,7 @@
     if (node.children) {
       if(node.numLeaves() > 1) {
         var address = getCellAddress(row, col) + ':' + getCellAddress((row + node.numLeaves() - 1), col)
-        this.sheet.getRange(address).mergeVertically();
+        sheet.getRange(address).mergeVertically();
       }
 
       // Keep track of total offset so far across children
@@ -64,7 +66,7 @@
   }
 
   function addNodeToCell(row, col, node) {
-    var cell = this.sheet.getRange(getCellAddress(row, col));
+    var cell = sheet.getRange(getCellAddress(row, col));
     cell.setFontColor('black');
     cell.setFormula("=hyperlink(\"" + node.url + "\";\"" + node.title+ "\")");
     cell.setBackground(node.color())
