@@ -120,7 +120,7 @@
       title: 'master',
       pointingTo: null,
       headRefName: 'master',
-      url: 'github.com/' + options.orgName + '/' + options.repoName
+      url: 'github.com/' + options.orgName.toLowerCase() + '/' + options.repoName
     })
     const pullsWithMaster = PRs.slice()
     pullsWithMaster.push(master)
