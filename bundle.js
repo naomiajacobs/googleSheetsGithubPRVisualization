@@ -1,5 +1,4 @@
 (function() {
-  var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
   var colors = {
     stale: '#f1c232',
     shippable: '#93c47d',
