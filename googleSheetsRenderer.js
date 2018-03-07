@@ -76,7 +76,7 @@
   }
 
   return {
-    renderTree: render,
+    renderTree: renderTree,
     onOpen: onOpen
   }
 })()
