@@ -21,9 +21,9 @@
     this.spreadsheet.addMenu(menuName, entries)
   }
 
-  function renderTree(tree) {
+  function renderTree(tree, tabName) {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
-    sheet = spreadsheet.getSheetByName('Branch Strategy');
+    sheet = spreadsheet.getSheetByName(tabName);
     clearOldCells()
     renderLegend()
     displayNode(legendLabels.length + 2, 0, tree) // leave some space between legend and branches
