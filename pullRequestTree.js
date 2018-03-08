@@ -111,7 +111,6 @@
       };
       return JSON.parse(UrlFetchApp.fetch(githubUrl, requestOptions));
     },
-    PullRequest: PullRequest
   }
 
   function extractPullRequests(response) {
