@@ -1,5 +1,7 @@
 # Google Sheets Github Pull Request Visualization
 
+[![Build Status](https://travis-ci.org/naomiajacobs/googleSheetsGithubPRVisualization.svg?branch=master)](https://travis-ci.org/naomiajacobs/googleSheetsGithubPRVisualization)
+
 ![Visualization Screenshot](screenshots/visualization.png?raw=true)
 
 This repo contains the code and instructions to add a visualization of your team's branch strategy to a tab in a Google Sheet.
