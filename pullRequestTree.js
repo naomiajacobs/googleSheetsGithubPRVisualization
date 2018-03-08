@@ -94,20 +94,24 @@
     }
   }
 
-  function fetchBranches(options) {
-    var githubUrl = 'https://api.github.com/graphql'
-    var query = "query {organization(login: \"" + options.orgName + "\") {repository(name: \"" + options.repoName + "\") {milestone(number: " + options.milestoneNumber + ") {pullRequests(last: 100, states:[OPEN]) {nodes {title url labels (last: 100) {nodes {name}} createdAt baseRefName headRefName mergeable commits (last: 1) {nodes {commit {status {state}}}}}}}}}}"
-    var requestOptions = {
-      method: 'POST',
-      payload: JSON.stringify({
-        query: query
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'bearer ' + options.token,
-      }
-    };
-    return JSON.parse(UrlFetchApp.fetch(githubUrl, requestOptions));
+  var dummyObj = {
+    // nest things here so we can access them and spy on them in specs
+    fetchBranches: function fetchBranches(options) {
+      var githubUrl = 'https://api.github.com/graphql'
+      var query = "query {organization(login: \"" + options.orgName + "\") {repository(name: \"" + options.repoName + "\") {milestone(number: " + options.milestoneNumber + ") {pullRequests(last: 100, states:[OPEN]) {nodes {title url labels (last: 100) {nodes {name}} createdAt baseRefName headRefName mergeable commits (last: 1) {nodes {commit {status {state}}}}}}}}}}"
+      var requestOptions = {
+        method: 'POST',
+        payload: JSON.stringify({
+          query: query
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'bearer ' + options.token,
+        }
+      };
+      return JSON.parse(UrlFetchApp.fetch(githubUrl, requestOptions));
+    },
+    PullRequest: PullRequest
   }
 
   function extractPullRequests(response) {
@@ -134,14 +138,14 @@
   }
 
   return {
-    // orgName, repoName, milestoneNumber, token
+    _private: dummyObj,
     pullRequestTree: function(options) {
-      var response = fetchBranches(options)
+      // options = orgName, repoName, milestoneNumber, token
+      var response = dummyObj.fetchBranches(options)
       var pullRequests = extractPullRequests(response)
       var tree = convertPRsToTree(pullRequests, options)
       return tree
     },
     colors: colors,
-    PullRequest: PullRequest,
   }
 })();

@@ -1,44 +1,24 @@
 const fs = require('fs');
-const { colors, PullRequest } = eval(fs.readFileSync('./pullRequestTree.js', 'utf8'));
+const { colors, pullRequestTree, _private } = eval(fs.readFileSync('./pullRequestTree.js', 'utf8'));
+const testResponse = eval(fs.readFileSync('./spec/support/testResponse.js', 'utf8'));
 
 describe("pullRequestTree", function() {
-
   it("should have colors", function() {
     expect(colors).not.toBeUndefined();
   });
 
-  describe('PullRequest', () => {
-    it('maps its options to properties properly', () => {
-      const PRFromGithubAPI = {
-        "title": "Rpm account color mls",
-        "url": "https://github.com/mavenlink/mavenlink/pull/11713",
-        "labels": {
-          "nodes": [
-            { "name": "Reviewable" },
-            { "name": "Requires QA" }
-          ]
-        },
-        "createdAt": "2018-03-08T00:45:21Z",
-        "baseRefName": "rpm_default_color_rules",
-        "headRefName": "rpm_account_color_mls",
-        "mergeable": "MERGEABLE",
-        "commits": {
-          "nodes": [
-            {
-              "commit": {
-                "status": {
-                  "state": "SUCCESS"
-                }
-              }
-            }
-          ]
-        }
+  describe('pullRequestTree', () => {
+    it('constructs the correct tree given a github array of PRs', () => {
+      const options = {
+        orgName: 'Mavenlink',
+        repoName: 'mavenlink',
+        milestoneNumber: 20,
+        token: 'foobar123',
       };
+      const spy = spyOn(_private, 'fetchBranches').and.returnValue(testResponse);
+      const head = pullRequestTree(options);
 
-      const pull = new PullRequest(PRFromGithubAPI);
-
-      expect(pull.testStatus).toEqual('SUCCESS');
-      expect(pull.labels).toEqual(['Reviewable', 'Requires QA']);
+      expect(head instanceof _private.PullRequest).toEqual(true)
     });
   });
 });
