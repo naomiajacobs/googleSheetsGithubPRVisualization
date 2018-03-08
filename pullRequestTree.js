@@ -141,6 +141,7 @@
       var tree = convertPRsToTree(pullRequests, options)
       return tree
     },
-    colors: colors
+    colors: colors,
+    PullRequest: PullRequest,
   }
 })();
