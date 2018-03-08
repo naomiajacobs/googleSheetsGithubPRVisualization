@@ -1,12 +1,9 @@
 const fs = require('fs');
 
-describe("pullRequestTreeSpec", function() {
+describe("pullRequestTree", function() {
   const githubPRs = eval(fs.readFileSync('./pullRequestTree.js', 'utf8'));
 
-  beforeEach(function() {
-  });
-
-  it("should have the method", function() {
+  it("should have colors", function() {
     expect(githubPRs.colors).not.toBeUndefined();
   });
 });
