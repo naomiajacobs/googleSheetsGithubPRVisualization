@@ -13,13 +13,20 @@ This repo contains the code and instructions to add a visualization of your team
 3. Navigate to Tools > Script Editor to open the Google App Scripts editor.
 4. Copy the code snippet below and paste it into your script. Fill in the variables with your information.
   ```javascript
+  // FILL THESE IN
+  var tabName = YOUR_TAB_NAME // The name of the Google Sheets menu tab you want the script to go under
+  var menuName = YOUR_MENU_NAME // The name of the menu item in the menu tab
+  var githubOrg = YOUR_GITHUB_ORGANIZATION_NAME // The name of the github organization your repo is nested under
+  var repoName = YOUR_REPO_NAME // The name of the repo that contains your milestone (may need to try lowercasing this)
+  var milestoneNumber = YOUR_MILESTONE_NUMBER // The milestone whose PRs you want to visualize
+  var token = YOUR_GITHUB_TOKEN // Generated Github token - you can get one in your Github settings
+
+
+  // YOU DON'T NEED TO TOUCH ANYTHING BELOW THIS LINE
   var prFetcherURL = "https://raw.githubusercontent.com/naomiajacobs/googleSheetsGithubPRVisualization/master/pullRequestTree.js"
   var rendererURL = "https://raw.githubusercontent.com/naomiajacobs/googleSheetsGithubPRVisualization/master/googleSheetsRenderer.js"
   var githubPRs = eval(UrlFetchApp.fetch(prFetcherURL).getContentText())
   var renderer = eval(UrlFetchApp.fetch(rendererURL).getContentText())
-
-  var tabName = YOUR_TAB_NAME
-  var menuName = YOUR_MENU_NAME
 
   function onOpen() {
     this.spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
@@ -33,10 +40,10 @@ This repo contains the code and instructions to add a visualization of your team
 
   function fetchBranchesAndRender() {
     var options = {
-      orgName: YOUR_GITHUB_ORGANIZATION_NAME,
-      repoName: YOUR_REPO_NAME,
-      milestoneNumber: YOUR_MILESTONE_NAME,
-      token: YOUR_GITHUB_TOKEN
+      orgName: githubOrg,
+      repoName: repoName,
+      milestoneNumber: milestoneNumber,
+      token: token
     }
     var tree = githubPRs.pullRequestTree(options)
     renderer.renderTree(tree, tabName)
