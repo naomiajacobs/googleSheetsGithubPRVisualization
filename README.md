@@ -14,12 +14,18 @@ This repo contains the code and instructions to add a visualization of your team
 4. Copy the code snippet below and paste it into your script. Fill in the variables with your information.
   ```javascript
   // FILL THESE IN
-  var tabName = YOUR_TAB_NAME // The name of the Google Sheets menu tab you want the script to go under
-  var menuName = YOUR_MENU_NAME // The name of the menu item in the menu tab
-  var githubOrg = YOUR_GITHUB_ORGANIZATION_NAME // The name of the github organization your repo is nested under
-  var repoName = YOUR_REPO_NAME // The name of the repo that contains your milestone (may need to try lowercasing this)
-  var milestoneNumber = YOUR_MILESTONE_NUMBER // The milestone whose PRs you want to visualize
-  var token = YOUR_GITHUB_TOKEN // Generated Github token - you can get one in your Github settings
+  // The name of the Google Sheets menu tab you want the script to go under
+  var tabName = YOUR_TAB_NAME
+  // The name of the menu item in the menu tab
+  var menuName = YOUR_MENU_NAME
+  // The name of the github organization your repo is nested under
+  var githubOrg = YOUR_GITHUB_ORGANIZATION_NAME
+  // The name of the repo that contains your milestone (may need to try lowercasing this)
+  var repoName = YOUR_REPO_NAME
+  // The milestone whose PRs you want to visualize
+  var milestoneNumber = YOUR_MILESTONE_NUMBER
+  // Generated Github token - you can get one in your Github settings
+  var token = YOUR_GITHUB_TOKEN
 
 
   // YOU DON'T NEED TO TOUCH ANYTHING BELOW THIS LINE
