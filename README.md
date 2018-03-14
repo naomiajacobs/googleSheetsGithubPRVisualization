@@ -6,7 +6,7 @@
 
 This repo contains the code and instructions to add a visualization of your team's branch strategy to a tab in a Google Sheet.
 
-```
+```javascript
 var prFetcherURL = "https://raw.githubusercontent.com/naomiajacobs/googleSheetsGithubPRVisualization/master/pullRequestTree.js"
 var rendererURL = "https://raw.githubusercontent.com/naomiajacobs/googleSheetsGithubPRVisualization/master/googleSheetsRenderer.js"
 var githubPRs = eval(UrlFetchApp.fetch(prFetcherURL).getContentText())
