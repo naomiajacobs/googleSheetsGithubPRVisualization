@@ -9,8 +9,6 @@
     { text: "NEEDS ACTION!  (Doesn't have QA label, CI red, or has conflicts)", color: githubPRs.colors.needsAction }
   ]
 
-  var sheet;
-
   function onOpen(menuName, tabName) {
     this.spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
     var entries = [{
@@ -23,13 +21,13 @@
 
   function renderTree(tree, tabName) {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
-    sheet = spreadsheet.getSheetByName(tabName);
-    clearOldCells()
-    renderLegend()
-    displayNode(legendLabels.length + 2, 0, tree) // leave some space between legend and branches
+    var sheet = spreadsheet.getSheetByName(tabName);
+    clearOldCells(sheet)
+    renderLegend(sheet)
+    displayNode(sheet, legendLabels.length + 2, 0, tree) // leave some space between legend and branches
   }
 
-  function renderLegend() {
+  function renderLegend(sheet) {
     var legendCells = sheet.getRange("B1:B" + legendLabels.length)
     legendCells.setFontColor('black');
     legendCells.setFontWeight('bold');
@@ -41,13 +39,13 @@
     })
   }
 
-  function clearOldCells() {
+  function clearOldCells(sheet) {
     var range = sheet.getRange("A1:Z26");
     range.clear()
   }
 
-  function displayNode(row, col, node) {
-    addNodeToCell(row, col, node)
+  function displayNode(sheet, row, col, node) {
+    addNodeToCell(sheet, row, col, node)
     if (node.children) {
       if(node.numLeaves() > 1) {
         var address = getCellAddress(row, col) + ':' + getCellAddress((row + node.numLeaves() - 1), col)
@@ -60,12 +58,12 @@
         if (index > 0) {
           offset += node.children[index - 1].numLeaves() - 1
         }
-        displayNode(row + index + offset, col + 1, child)
+        displayNode(sheet, row + index + offset, col + 1, child)
       })
     }
   }
 
-  function addNodeToCell(row, col, node) {
+  function addNodeToCell(sheet, row, col, node) {
     var cell = sheet.getRange(getCellAddress(row, col));
     cell.setFontColor('black');
     cell.setFormula("=hyperlink(\"" + node.url + "\";\"" + node.title+ "\")");
