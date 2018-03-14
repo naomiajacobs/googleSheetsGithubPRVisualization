@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/naomiajacobs/googleSheetsGithubPRVisualization.svg?branch=master)](https://travis-ci.org/naomiajacobs/googleSheetsGithubPRVisualization)
 
-![Visualization Screenshot](screenshots/visualization.png?raw=true)
-
 This repo contains the code and instructions to add a visualization of your team's branch strategy to a tab in a Google Sheet.
+
+![Visualization Screenshot](screenshots/visualization.png?raw=true)
 
 ```javascript
 var prFetcherURL = "https://raw.githubusercontent.com/naomiajacobs/googleSheetsGithubPRVisualization/master/pullRequestTree.js"
@@ -37,7 +37,8 @@ function fetchBranchesAndRender() {
 }
 ```
 
-To use this code:
+### To use this code:
+
 1. Make a Google Sheet
 2. Pick a target tab in the sheet that you want the visualization to appear on.
 3. Navigate to Tools > Script Editor to open the Google App Scripts editor.
