@@ -24,7 +24,7 @@ This repo contains the code and instructions to add a visualization of your team
   function onOpen() {
     this.spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
     var entries = [{
-      name : YOUR_TAB_NAME,
+      name : tabName,
       functionName : "fetchBranchesAndRender"
     }]
 
