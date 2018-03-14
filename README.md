@@ -13,9 +13,16 @@ var githubPRs = eval(UrlFetchApp.fetch(prFetcherURL).getContentText())
 var renderer = eval(UrlFetchApp.fetch(rendererURL).getContentText())
 
 var tabName = YOUR_TAB_NAME
+var menuName = YOUR_MENU_NAME
 
 function onOpen() {
-  renderer.onOpen(DESIRED_MENU_NAME, tabName)
+  this.spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+  var entries = [{
+    name : YOUR_TAB_NAME,
+    functionName : "fetchBranchesAndRender"
+  }]
+
+  this.spreadsheet.addMenu(menuName, entries)
 }
 
 function fetchBranchesAndRender() {

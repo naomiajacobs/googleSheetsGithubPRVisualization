@@ -9,16 +9,6 @@
     { text: "NEEDS ACTION!  (Doesn't have QA label, CI red, or has conflicts)", color: githubPRs.colors.needsAction }
   ]
 
-  function onOpen(menuName, tabName) {
-    this.spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
-    var entries = [{
-      name : tabName,
-      functionName : "fetchBranchesAndRender"
-    }]
-
-    this.spreadsheet.addMenu(menuName, entries)
-  }
-
   function renderTree(tree, tabName) {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
     var sheet = spreadsheet.getSheetByName(tabName);
@@ -77,6 +67,5 @@
 
   return {
     renderTree: renderTree,
-    onOpen: onOpen
   }
 })()
