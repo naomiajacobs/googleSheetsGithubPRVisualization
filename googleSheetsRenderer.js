@@ -3,13 +3,7 @@
 
   // In Google Scripts, we don't have ES6 or module support
 
-  var legendLabels = [
-    { text: 'STALE, PULL ME THROUGH! (Open more than 5 days)', color: githubPRs.colors.stale },
-    { text: "SHIP IT! (Green, no conflicts, QA'ed, LGTM)", color: githubPRs.colors.shippable },
-    { text: "NEEDS ACTION!  (Doesn't have QA label, CI red, or has conflicts)", color: githubPRs.colors.needsAction },
-    { text: "Blocked", color: githubPRs.colors.blocked },
-    { text: "WIP", color: githubPRs.colors.wip }
-  ]
+  var legendLabels = Object.keys(githubPRs.colors).map(function(colorKey) { return githubPRs.colors[colorKey] })
 
   function renderTree(tree, tabName) {
     var spreadsheet = SpreadsheetApp.getActiveSpreadsheet()
@@ -26,7 +20,7 @@
     legendCells.setVerticalAlignment('middle');
     legendLabels.forEach(function(label, index) {
       var cell = sheet.getRange("B" + (index + 1) + ":" + "B" + (index + 1));
-      cell.setBackground(label.color);
+      cell.setBackground(label.hex);
       cell.setValue(label.text);
     })
   }

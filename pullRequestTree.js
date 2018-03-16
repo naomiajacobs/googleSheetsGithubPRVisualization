@@ -1,11 +1,11 @@
 (function() {
   var colors = {
-    stale: '#f1c232',
-    shippable: '#93c47d',
-    normal: '#cccccc',
-    needsAction: '#e06666',
-    blocked: '#f6d0d0',
-    WIP: '#d1c7f5'
+    stale: { hex: '#f1c232', text: 'STALE, PULL ME THROUGH! (Open more than 5 days)' },
+    shippable: { hex: '#93c47d', text: "SHIP IT! (Green, no conflicts, QA'ed, LGTM)" },
+    needsAction: { hex: '#e06666', text: "NEEDS ACTION!  (Doesn't have QA label, CI red, or has conflicts)" },
+    blocked: { hex: '#f6d0d0', text: "Blocked" },
+    WIP: { hex: '#d1c7f5', text: "WIP" }
+    normal: { hex: '#cccccc', text: "None of the above" },
   }
 
   function PullRequest(branch) {
@@ -65,7 +65,7 @@
     return createdAt < fiveDaysAgo
   }
 
-  PullRequest.prototype.color = function() { return colors[this.state] }
+  PullRequest.prototype.color = function() { return colors[this.state].hex }
 
   PullRequest.prototype.numLeaves = function() {
     var count = 0
