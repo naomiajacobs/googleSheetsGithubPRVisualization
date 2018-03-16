@@ -3,6 +3,14 @@
 
   // In Google Scripts, we don't have ES6 or module support
 
+  // var legendLabels = [
+  //   { text: 'STALE, PULL ME THROUGH! (Open more than 5 days)', color: githubPRs.colors.stale },
+  //   { text: "SHIP IT! (Green, no conflicts, QA'ed, LGTM)", color: githubPRs.colors.shippable },
+  //   { text: "NEEDS ACTION!  (Doesn't have QA label, CI red, or has conflicts)", color: githubPRs.colors.needsAction },
+  //   { text: "Blocked", color: githubPRs.colors.blocked },
+  //   { text: "WIP", color: githubPRs.colors.WIP }
+  // ]
+
   var legendLabels = Object.keys(githubPRs.colors).map(function(colorKey) { return githubPRs.colors[colorKey] })
 
   function renderTree(tree, tabName) {

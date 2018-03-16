@@ -2,9 +2,9 @@
   var colors = {
     stale: { hex: '#f1c232', text: 'STALE, PULL ME THROUGH! (Open more than 5 days)' },
     shippable: { hex: '#93c47d', text: "SHIP IT! (Green, no conflicts, QA'ed, LGTM)" },
-    needsAction: { hex: '#e06666', text: "NEEDS ACTION!  (Doesn't have QA label, CI red, or has conflicts)" },
+    needsAction: { hex: '#e06666', text: "NEEDS ACTION! (Doesn't have QA label, CI red, or has conflicts)" },
     blocked: { hex: '#f6d0d0', text: "Blocked" },
-    WIP: { hex: '#d1c7f5', text: "WIP" }
+    WIP: { hex: '#d1c7f5', text: "WIP" },
     normal: { hex: '#cccccc', text: "None of the above" },
   }
 
