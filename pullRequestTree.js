@@ -3,7 +3,9 @@
     stale: '#f1c232',
     shippable: '#93c47d',
     normal: '#cccccc',
-    needsAction: '#e06666'
+    needsAction: '#e06666',
+    blocked: '#f6d0d0',
+    WIP: '#d1c7f5'
   }
 
   function PullRequest(branch) {
@@ -50,6 +52,8 @@
     if (this.title === 'master') { return 'normal' }
     if (this.shippable) { return 'shippable' }
     if (this.needsAction()) { return 'needsAction' }
+    if (this.blocked) { return 'blocked' }
+    if (this.WIP) { return 'WIP' }
     if (this.stale()) { return 'stale' }
     return 'normal'
   }
