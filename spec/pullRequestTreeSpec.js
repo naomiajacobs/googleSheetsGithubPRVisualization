@@ -62,7 +62,6 @@ describe("pullRequestTree", function() {
       const spy = spyOn(_private, 'fetchBranches').and.returnValue(badTestResponse);
       const head = pullRequestTree(options);
 
-      console.log(head);
       expect(head.children.length).toEqual(1);
     });
   });
