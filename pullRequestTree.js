@@ -131,7 +131,8 @@
     var pullsWithMaster = PRs.slice()
     pullsWithMaster.push(master)
     PRs.forEach(function(pull) {
-      findParentNode(pull, pullsWithMaster).children.push(pull)
+      var parentNode = findParentNode(pull, pullsWithMaster);
+      parentNode && parentNode.children.push(pull);
     })
     return master
   }
